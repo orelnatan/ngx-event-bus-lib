@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 
-import { Data, Interceptor, intercept } from '../../global-events';
+import { GEvent, broadcast } from 'ngx-event-bus';
+
 import { ImageNotFound } from './image-not-found';
 
-@Interceptor([
-  // { type: "LOGIN", action: "login" },
-  // { type: "TOGGLE", action: "toggle" }
-])
 @Component({
   selector: 'app-home',
   imports: [ImageNotFound],
@@ -14,15 +11,9 @@ import { ImageNotFound } from './image-not-found';
   styleUrl: './home.scss',
 })
 export class Home {
-  constructor() {
-    intercept(this);
-  } 
-
-  login(payload: Data): void {
-    console.log("login intercepted in Home, ", payload);
-  }
-
-  toggle(payload: Data): void {
-    console.log("toggle intercepted in Home, ", payload);
+  broadcast(): void {
+    broadcast(new GEvent('LOGOUT', {
+      rememberMe: true
+    }))
   }
 }

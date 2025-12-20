@@ -4,7 +4,7 @@ import { ProductsService } from '../products';
 @Component({
   selector: 'app-board',
   imports: [],
-  providers: [ProductsService],
+  // providers: [ProductsService],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })

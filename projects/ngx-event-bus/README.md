@@ -21,7 +21,7 @@ ng generate --help
 To build the library, run:
 
 ```bash
-ng build NgxEventBus
+ng build ngx-event-bus
 ```
 
 This command will compile your project, and the build artifacts will be placed in the `dist/` directory.

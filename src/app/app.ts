@@ -1,30 +1,25 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductsService } from './products';
-import { GlobalEventsModule } from '../global-events';
 
-// import { Data, GlobalEventsModule, Interceptor, intercept } from '../global-events';
+import { Interceptor, Payload, intercept } from 'ngx-event-bus';
 
-// @Interceptor([{ type: "LOGIN", action: "login" }])
+@Interceptor([
+  { type: "LOGOUT", action: "logout" },
+])
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-   // GlobalEventsModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
- // productsService = inject(ProductsService);
-  
-  protected readonly title = signal('event-bus-lib');
+export class App {  
+  constructor() {
+    intercept(this);
+  } 
 
-  // constructor() {
-  //   intercept(this);
-  // } 
-
-  // login(payload: Data): void {
-  //   console.log(payload);
-  // }
+  logout(payload: Payload): void {
+    console.log("logout intercepted in App Component, ", payload);
+  }
 }

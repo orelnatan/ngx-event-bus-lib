@@ -1,18 +1,19 @@
-import { ɵPipeDef } from "@angular/core";
+import { Renderer2, RendererFactory2, inject, ɵPipeDef } from "@angular/core";
 
-import { GlobalEventsModule } from "../global-events.module";
-import { IGEvent, Args } from "../models";
 import { initListeners, isPipe } from "../utils";
 import { DECORATOR_APPLIED } from "../consts";
+import { Event, Args } from "../models";
 
-export function Interceptor<T extends Args>(events: IGEvent[] = []): (orgConstructor: T) => void {
+export function Interceptor<T extends Args>(events: Event[] = []): (orgConstructor: T) => void {  
   return function(orgConstructor: T): void {
     let listeners: Function[] = [];
   
     orgConstructor.prototype[DECORATOR_APPLIED] = true;
     orgConstructor.prototype._constructor = function(instance: InstanceType<T>): void {
+      const renderer2: Renderer2 = inject(RendererFactory2).createRenderer(null, null);
+
       listeners = initListeners(
-        events, instance, GlobalEventsModule.renderer2);
+        events, instance, renderer2);
     }
     
     const onDestroy: Function = orgConstructor.prototype.ngOnDestroy;

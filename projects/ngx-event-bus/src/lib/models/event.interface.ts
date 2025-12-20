@@ -1,5 +1,5 @@
 
-export interface IGEvent {
+export interface Event {
   type: string;
   action: string;
 }
