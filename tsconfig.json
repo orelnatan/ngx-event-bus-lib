@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "NgxEventBus": [
+        "./dist/ngx-event-bus"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -12,8 +17,9 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ES2022",
-    "module": "preserve"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -28,6 +34,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-event-bus/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-event-bus/tsconfig.spec.json"
     }
   ]
 }
