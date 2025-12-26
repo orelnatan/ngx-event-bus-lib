@@ -1,4 +1,4 @@
-import { Renderer2, RendererFactory2, inject, ɵPipeDef } from "@angular/core";
+import { Renderer2, RendererFactory2, ɵPipeDef, ɵɵdirectiveInject } from "@angular/core";
 
 import { initListeners, isPipe } from "../utils";
 import { DECORATOR_APPLIED } from "../consts";
@@ -10,7 +10,8 @@ export function Interceptor<T extends Args>(events: Event[] = []): (orgConstruct
   
     orgConstructor.prototype[DECORATOR_APPLIED] = true;
     orgConstructor.prototype._constructor = function(instance: InstanceType<T>): void {
-      const renderer2: Renderer2 = inject(RendererFactory2).createRenderer(null, null);
+      const rendererFactory: RendererFactory2 = ɵɵdirectiveInject(RendererFactory2);
+      const renderer2: Renderer2 = rendererFactory.createRenderer(null, null);
 
       listeners = initListeners(
         events, instance, renderer2);
