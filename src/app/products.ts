@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { Interceptor, Payload, intercept } from 'ngx-event-bus';
+import { Interceptor, intercept } from 'ngx-event-bus';
 
 @Interceptor([
-  { type: "LOGOUT", action: "logout" },
+ // { type: "LOGOUT", action: "logout" },
 ])
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class ProductsService {
   constructor() {
     intercept(this);
   } 
 
-  logout(payload: Payload): void {
-    console.log("logout intercepted in ProductsService, ", payload);
-  }
+  // logout(payload: Payload): void {
+  //   console.log("logout intercepted in ProductsService, ", payload);
+  // }
 }

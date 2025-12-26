@@ -1,10 +1,9 @@
-import { Payload } from "../models";
 
-export class GEvent {
+export class GEvent<T> {
   public type: string;
-  public payload?: Payload;
+  public payload?: T;
 
-  constructor(type: string, paylaod?: Payload) {
+  constructor(type: string, paylaod?: T) {
     this.type = type;
     this.payload = paylaod;
   }

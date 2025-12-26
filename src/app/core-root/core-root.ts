@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
 import { GEvent, broadcast } from 'ngx-event-bus';
 // import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
+
+import { LogoutGEvent, ToggleGEvent } from '../interfaces';
 
 @Component({
   selector: 'app-core-root',
@@ -11,15 +13,16 @@ import { GEvent, broadcast } from 'ngx-event-bus';
   styleUrl: './core-root.scss',
 })
 export class CoreRoot {
-  // productsService = inject(ProductsService);
-
-  broadcast(): void {
-    broadcast(new GEvent('LOGOUT', {
-      dispose: true
+  broadcastLogout(): void {
+    broadcast(new GEvent<LogoutGEvent>('LOGOUT', {
+      rememberMe: false
     }))
+  }
 
-    broadcast(new GEvent('TOGGLE', {
-      mode: "DARK"
+  broadcastToggle(): void {
+    broadcast(new GEvent<ToggleGEvent>('TOGGLE', {
+      mode: "DARK",
+      brightness: 45
     }))
   }
 }
