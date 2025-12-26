@@ -1,3 +1,3 @@
 
-export { initListeners } from './init-listeners.function';
-export { isPipe } from './is-pipe.function';
+export { initListeners } from './init-listeners.util';
+export { isPipe } from './is-pipe.util';

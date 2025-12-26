@@ -1,10 +1,10 @@
 
-export class GEvent<T> {
-  public type: string;
-  public payload?: T;
+export class GEvent<P = void, T extends string = string> {
+  readonly type: T;
+  readonly payload: P;
 
-  constructor(type: string, paylaod?: T) {
+  constructor(type: T, payload: P) {
     this.type = type;
-    this.payload = paylaod;
+    this.payload = payload;
   }
 }

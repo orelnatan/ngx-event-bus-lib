@@ -1,3 +1,4 @@
 
-export * from './logout-gevent.interface';
-export * from './toggle-gevent.interface';
+export * from './g-event-types.enum';
+export * from './theme-event.interface';
+export * from './locale-event.interface';

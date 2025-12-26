@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
 import { GEvent, broadcast } from 'ngx-event-bus';
-// import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
+//import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
 
-import { LogoutGEvent, ToggleGEvent } from '../interfaces';
+import { Locale, Logout, Theme } from '../classes/g-events.class';
+import { GEventTypes, ThemeEvent } from '../interfaces';
 
 @Component({
   selector: 'app-core-root',
@@ -14,15 +15,20 @@ import { LogoutGEvent, ToggleGEvent } from '../interfaces';
 })
 export class CoreRoot {
   broadcastLogout(): void {
-    broadcast(new GEvent<LogoutGEvent>('LOGOUT', {
-      rememberMe: false
-    }))
+    broadcast(new Logout());
   }
 
-  broadcastToggle(): void {
-    broadcast(new GEvent<ToggleGEvent>('TOGGLE', {
-      mode: "DARK",
-      brightness: 45
-    }))
+  broadcastTheme(): void {
+    broadcast(new Theme({
+      mode: "LIGHT",
+      brightness: 32
+    }));
+  }
+
+  broadcastLocale(): void {
+    broadcast(new Locale({
+      lang: "he_IL",
+      dir: "rl"
+    }));
   }
 }

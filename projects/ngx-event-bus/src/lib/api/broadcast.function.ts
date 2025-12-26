@@ -1,5 +1,11 @@
-import { GEvent } from '../classes';
+import { GEvent } from "../classes";
 
-export async function broadcast<T>(event: GEvent<T>): Promise<void> {
-  window.dispatchEvent(new CustomEvent(event.type, { detail: event.payload }))
+export function broadcast<P, T extends string>(
+  event: GEvent<P, T>
+): void {
+  window.dispatchEvent(
+    new CustomEvent<P>(event.type, {
+      detail: event.payload,
+    })
+  );
 }

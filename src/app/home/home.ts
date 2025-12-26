@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 
- import { GEvent, Interceptor, broadcast, intercept } from 'ngx-event-bus';
+import { Interceptor, intercept } from 'ngx-event-bus';
+//import { GEvent, Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { ImageNotFound } from './image-not-found';
-import { LogoutGEvent, ToggleGEvent } from '../interfaces';
+import { GEventTypes, LocaleEvent, ThemeEvent } from '../interfaces';
 
 @Interceptor([
-  { type: "LOGOUT", action: "logout" },
-  { type: "TOGGLE", action: "toggle" },
+  { type: GEventTypes.Logout, action: "logout" },
+  { type: GEventTypes.Theme, action: "theme" },
+  { type: GEventTypes.Locale, action: "locale" },
 ])
 @Component({
   selector: 'app-home',
@@ -20,11 +22,15 @@ export class Home {
     intercept(this);
   } 
 
-  logout(payload: LogoutGEvent): void {
+  logout(payload: null): void {
     console.log("logout intercepted in Home Component, ", payload);
   }
 
-  toggle(payload: ToggleGEvent): void {
-    console.log("toggle intercepted in Home Component, ", payload);
+  theme(payload: ThemeEvent): void {
+    console.log("theme intercepted in Home Component, ", payload);
+  }
+
+  locale(payload: LocaleEvent): void {
+    console.log("locale intercepted in Home Component, ", payload);
   }
 }
