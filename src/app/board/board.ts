@@ -1,6 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { ProductsService } from '../products';
+import { Interceptor, intercept } from 'ngx-event-bus';
 
+import { ProductsService } from '../products';
+import { GEventTypes, ThemeEvent } from '../interfaces';
+
+@Interceptor([
+  { type: GEventTypes.Theme, action: "theme" },
+])
 @Component({
   selector: 'app-board',
   imports: [],
@@ -11,4 +17,11 @@ import { ProductsService } from '../products';
 export class Board {
   productsService = inject(ProductsService);
 
+  constructor() {
+    intercept(this);
+  } 
+
+  theme(payload: ThemeEvent): void {
+    console.log("theme intercepted in Board Component, ", payload);
+  }
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-
-import { Interceptor, intercept } from 'ngx-event-bus';
+import { Interceptor, broadcast, intercept } from 'ngx-event-bus';
 //import { GEvent, Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { ImageNotFound } from './image-not-found';
 import { GEventTypes, LocaleEvent, ThemeEvent } from '../interfaces';
+import { Theme } from '../classes/g-events.class';
 
 @Interceptor([
   { type: GEventTypes.Logout, action: "logout" },
@@ -32,5 +32,12 @@ export class Home {
 
   locale(payload: LocaleEvent): void {
     console.log("locale intercepted in Home Component, ", payload);
+  }
+
+  broadcastTheme(): void {
+    broadcast(new Theme({
+      mode: "DARK",
+      brightness: 45,
+    }));
   }
 }

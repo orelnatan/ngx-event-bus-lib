@@ -1,19 +1,21 @@
 import { Directive } from '@angular/core';
-// import { Data, Interceptor, intercept } from '../../global-events';
+import { Interceptor, intercept } from 'ngx-event-bus';
 
-// @Interceptor([
-//   { type: "TOGGLE", action: "toggle" }
-// ])
+import { GEventTypes, ThemeEvent } from '../interfaces';
+
+@Interceptor([
+  { type: GEventTypes.Theme, action: "theme" },
+])
 @Directive({
   selector: '[appImageNotFound]',
 })
 export class ImageNotFound {
 
   constructor() {
-   // intercept(this);
+    intercept(this);
   }
 
-  // toggle(payload: Data): void {
-  //   console.log("toggle intercepted in ImageNotFound, ", payload);
-  // }
+  theme(payload: ThemeEvent): void {
+    console.log("theme intercepted in ImageNotFound Directive, ", payload);
+  }
 }
