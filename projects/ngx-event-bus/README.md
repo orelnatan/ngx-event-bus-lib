@@ -48,6 +48,14 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
+## Running unit-tests(lib)
+
+Run the command: ng test ngx-event-bus
+
+## Running unit-tests with coverage(lib)
+
+Run the command ng test ngx-event-bus --coverage
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
@@ -61,3 +69,5 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+https://medium.com/angular-in-depth/complete-beginner-guide-to-publish-an-angular-library-to-npm-d42343801660
