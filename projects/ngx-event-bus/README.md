@@ -24,6 +24,10 @@ To build the library, run:
 ng build ngx-event-bus
 ```
 
+Or for Production:
+
+ng build ngx-event-bus --configuration production
+
 This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
 
 ### Publishing the Library
