@@ -22,7 +22,7 @@ export class Home {
     intercept(this);
   } 
 
-  logout(payload: null): void {
+  logout(payload: {}): void {
     console.log("logout intercepted in Home Component, ", payload);
   }
 

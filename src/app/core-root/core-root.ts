@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
-import { broadcast } from 'ngx-event-bus';
+import { GEvent, broadcast } from 'ngx-event-bus';
 //import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { Locale, Logout, Theme } from '../classes/g-events.class';
-import { GEventTypes } from '../interfaces';
+import { GEventTypes, LocaleEvent, ThemeEvent } from '../interfaces';
 
 export const TRUSTED_EVENT: symbol = Symbol('__trustedEvent');
 
@@ -28,10 +28,12 @@ export class CoreRoot {
   }
 
   broadcastLocale(): void {
-    broadcast(new Locale({
-      lang: "he_IL",
-      dir: "rl"
-    }))
+    // broadcast(new Locale({
+    //   lang: "he_IL",
+    //   dir: "rl"
+    // }))
+
+    broadcast(new GEvent(GEventTypes.Locale, 42));
   }
 }
 

@@ -5,15 +5,15 @@
  * This object is used with the Event Bus functions, ensuring
  * type-safe communication across your Angular application.
  *
- * @template P - Type of the event payload. Defaults to `void` if no payload is needed.
  * @template T - Type of the event name. Defaults to `string`, but string literals are recommended.
+ * @template P - Type of the event payload. Defaults to `void` if no payload is needed.
 */
-export class GEvent<P = void, T extends string = string> {
+export class GEvent<T extends string = string, P = void> {
   /** The type of the event */
   readonly type: T;
 
   /** The strongly-typed payload of the event */
-  readonly payload: P;
+  readonly payload?: P;
 
   /**
    * Creates a new typed event instance.
@@ -21,7 +21,7 @@ export class GEvent<P = void, T extends string = string> {
    * @param type - The event type string.
    * @param payload - The event payload.
   */
-  constructor(type: T, payload: P) {
+  constructor(type: T, payload?: P) {
     this.type = type;
     this.payload = payload;
   }
