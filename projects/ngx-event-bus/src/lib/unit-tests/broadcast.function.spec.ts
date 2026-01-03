@@ -32,7 +32,7 @@ describe('broadcast', () => {
     broadcast(event);
 
     const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
-    expect(dispatchedEvent.detail).toMatchObject(payload);
+    expect(dispatchedEvent.detail).toMatchObject({ data: payload});
   });
 
   it('should not reuse the original payload object', () => {

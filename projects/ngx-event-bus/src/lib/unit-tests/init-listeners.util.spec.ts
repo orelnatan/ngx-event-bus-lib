@@ -57,8 +57,8 @@ describe('initListeners', () => {
 
     listener({ detail: trustedDetail });
 
-    expect(instance.handle).toHaveBeenCalledOnce();
-    expect(instance.handle).toHaveBeenCalledWith(trustedDetail);
+    expect(instance.handle).toHaveBeenCalledOnce()
+    expect(instance.handle).toHaveBeenCalledWith(trustedDetail[0]);
   });
 
   it('should ignore events with untrusted payload prototype', () => {

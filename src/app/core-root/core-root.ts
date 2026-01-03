@@ -33,7 +33,9 @@ export class CoreRoot {
     //   dir: "rl"
     // }))
 
-    broadcast(new GEvent(GEventTypes.Locale, 42));
+   broadcast(new GEvent<GEventTypes.Locale, { dddd: string[] }>(GEventTypes.Locale, { dddd: []}));
+
+  // broadcast(new GEvent<GEventTypes.Locale, number>(GEventTypes.Locale, 321));
   }
 }
 

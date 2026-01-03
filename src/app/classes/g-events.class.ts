@@ -3,7 +3,7 @@ import { GEvent, broadcast } from 'ngx-event-bus';
 
 import { GEventTypes, LocaleEvent, ThemeEvent } from "../interfaces";
 
-export class Logout extends GEvent {
+export class Logout extends GEvent<GEventTypes.Logout> {
   static readonly TYPE = GEventTypes.Logout;
 
   constructor() {

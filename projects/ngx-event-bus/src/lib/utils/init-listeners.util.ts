@@ -14,7 +14,7 @@ export function initListeners<T extends Args>(events: Event[], instance: Instanc
         );
       }
 
-      instance[event.action](data.detail);
+      instance[event.action](data.detail.data);
     })
   })
 }
