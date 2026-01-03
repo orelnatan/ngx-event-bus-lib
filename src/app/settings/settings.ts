@@ -11,6 +11,7 @@ import { Locale } from '../classes/g-events.class';
 ])
 @Component({
   selector: 'app-settings',
+  imports: [SuffixPipe],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })

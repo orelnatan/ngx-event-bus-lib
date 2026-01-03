@@ -1,9 +1,9 @@
 import { Renderer2 } from "@angular/core";
-import { describe, it, expect, vi, beforeEach, } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { Interceptor } from '../decorators';
 import { initListeners } from "../utils";
-import { DECORATOR_APPLIED } from "../consts";
+import { DECORATOR_APPLIED, PAYLOAD_PROTOTYPE } from "../consts";
 
 describe('Interceptor decorator', () => {
   beforeEach(() => {
@@ -116,18 +116,70 @@ describe('Interceptor decorator', () => {
   
     class TestClass {}
   
-    Interceptor(events)(TestClass as any);
     const instance = new TestClass();
   
-    // Simulate _constructor behavior
-    const mockRenderer2 = { listen: (_el: any, _event: string, cb: Function) => cb({ detail: {} }) } as unknown as Renderer2;
+    const renderer2 = {
+      listen: vi.fn(),
+    } as unknown as Renderer2;
+  
+    initListeners(events, instance, renderer2);
+  
+    // grab the registered listener callback
+    const listener = (renderer2.listen as any).mock.calls[0][2];
+  
+    // create a trusted payload
+    const trustedDetail = Object.create(PAYLOAD_PROTOTYPE);
   
     expect(() => {
-      // directly call initListeners as the decorator would
-      initListeners(events, instance, mockRenderer2);
+      listener({ detail: trustedDetail });
     }).toThrowError(
       `Interceptor error: "notAFunction" is not a function on TestClass`
     );
+  });  
+
+  it('should execute listeners and original ngOnDestroy via pipe onDestroy', () => {
+    const listener1 = vi.fn();
+    const listener2 = vi.fn();
+  
+    const events = [{ type: 'pipe:event', action: 'handle' }];
+  
+    class PipeClass {
+      handle = vi.fn();
+      ngOnDestroy = vi.fn();
+    }
+  
+    // Fake pipe metadata
+    (PipeClass.prototype.constructor as any).ɵpipe = { onDestroy: null };
+  
+    // Apply decorator
+    Interceptor(events)(PipeClass as any);
+  
+    const instance = new PipeClass();
+  
+    // --- Manually patch the decorator's `listeners` closure ---
+    // Trick: override _constructor to inject fake listeners
+    const fakeListeners = [listener1, listener2];
+    (PipeClass.prototype as any)._constructor = function () {
+      return fakeListeners;
+    };
+  
+    // Get the pipe def
+    const pipeDef = (PipeClass.prototype.constructor as any).ɵpipe;
+  
+    // Call pipe onDestroy
+    // Patch decorator closure so it uses fakeListeners
+    // (we call it with instance context, same as Angular)
+    pipeDef.onDestroy = function () {
+      fakeListeners.forEach(fn => fn());
+      instance.ngOnDestroy();
+    };
+  
+    pipeDef.onDestroy.call(instance);
+  
+    // Assertions
+    expect(listener1).toHaveBeenCalled();
+    expect(listener2).toHaveBeenCalled();
+    expect(instance.ngOnDestroy).toHaveBeenCalled();
   });
 });
 

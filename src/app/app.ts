@@ -16,9 +16,7 @@ import { GEventTypes, ThemeEvent } from './interfaces';
   styleUrl: './app.scss'
 })
 export class App { 
-  constructor() {
-    intercept(this);
-  }
+  
   
   theme(payload: ThemeEvent): void {
     console.log("theme intercepted in App Component, ", payload);

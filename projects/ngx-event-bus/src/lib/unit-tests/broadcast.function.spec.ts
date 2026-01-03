@@ -1,87 +1,75 @@
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { broadcast } from '../api';
+import { PAYLOAD_PROTOTYPE, TRUSTED_EVENT } from '../consts';
 import { GEvent } from '../classes';
+import { broadcast } from '../api';
 
 describe('broadcast', () => {
   let dispatchSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
-    dispatchSpy = vi.spyOn(window, 'dispatchEvent').mockImplementation(() => true);
+    dispatchSpy = vi.spyOn(window, 'dispatchEvent');
   });
 
   afterEach(() => {
     dispatchSpy.mockRestore();
   });
 
-  it('should dispatch a CustomEvent with the correct type and payload', () => {
-    const payload = { message: 'hello' };
-    const event = new GEvent('TEST_EVENT', payload);
+  it('should dispatch a CustomEvent with the given type', () => {
+    const event = new GEvent('test:event', {});
 
     broadcast(event);
 
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<typeof payload>;
-    expect(customEvent.type).toBe('TEST_EVENT');
-    expect(customEvent.detail).toEqual(payload);
+    expect(dispatchSpy).toHaveBeenCalledOnce();
+    expect(dispatchSpy.mock.calls[0][0]).toBeInstanceOf(CustomEvent);
+    expect(dispatchSpy.mock.calls[0][0].type).toBe('test:event');
   });
 
-  it('should work with void payload', () => {
-    const event = new GEvent<void, 'VOID_EVENT'>('VOID_EVENT', undefined);
-  
+  it('should copy payload properties into event.detail', () => {
+    const payload = { foo: 'bar', count: 3 };
+    const event = new GEvent('payload:event', payload);
+
     broadcast(event);
-  
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<void>;
-    expect(customEvent.type).toBe('VOID_EVENT');
-    expect(customEvent.detail).toBeNull(); 
+
+    const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
+    expect(dispatchedEvent.detail).toMatchObject(payload);
   });
 
-  it('should handle string payload', () => {
-    const payload = 'hello string';
-    const event = new GEvent('STRING_EVENT', payload);
+  it('should not reuse the original payload object', () => {
+    const payload = { a: 1 };
+    const event = new GEvent('clone:event', payload);
 
     broadcast(event);
 
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<string>;
-    expect(customEvent.detail).toBe(payload);
+    const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
+    expect(dispatchedEvent.detail).not.toBe(payload);
   });
 
-  it('should handle numeric payload', () => {
-    const payload = 42;
-    const event = new GEvent('NUMBER_EVENT', payload);
+  it('should create detail object with PAYLOAD_PROTOTYPE as its prototype', () => {
+    const event = new GEvent('proto:event', {});
 
     broadcast(event);
 
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<number>;
-    expect(customEvent.detail).toBe(42);
+    const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
+    expect(Object.getPrototypeOf(dispatchedEvent.detail)).toBe(PAYLOAD_PROTOTYPE);
   });
 
-  it('should handle null payload', () => {
-    const event = new GEvent<null, 'NULL_EVENT'>('NULL_EVENT', null);
+  it('should expose TRUSTED_EVENT via prototype chain', () => {
+    const event = new GEvent('trusted:event', {});
 
     broadcast(event);
 
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<null>;
-    expect(customEvent.detail).toBeNull();
-  });
+    const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
 
-  it('should handle array payload', () => {
-    const payload = [1, 2, 3];
-    const event = new GEvent<number[], 'ARRAY_EVENT'>('ARRAY_EVENT', payload);
+    // accessible
+    expect(dispatchedEvent.detail[TRUSTED_EVENT]).toBe(true);
 
-    broadcast(event);
-
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<number[]>;
-    expect(customEvent.detail).toEqual([1, 2, 3]);
-  });
-
-  it('should handle object payload', () => {
-    const payload = { foo: 'bar', count: 10 };
-    const event = new GEvent<typeof payload, 'OBJECT_EVENT'>('OBJECT_EVENT', payload);
-
-    broadcast(event);
-
-    const customEvent = dispatchSpy.mock.calls[0][0] as CustomEvent<typeof payload>;
-    expect(customEvent.detail).toEqual(payload);
+    // but not an own property
+    expect(
+      Object.prototype.hasOwnProperty.call(
+        dispatchedEvent.detail,
+        TRUSTED_EVENT
+      )
+    ).toBe(false);
   });
 });
