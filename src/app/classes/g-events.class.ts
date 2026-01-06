@@ -14,8 +14,8 @@ export class Logout extends GEvent<GEventTypes.Logout> {
 export class Theme extends GEvent<GEventTypes.Theme, ThemeEvent> {
   static readonly TYPE = GEventTypes.Theme;
 
-  constructor(payload: ThemeEvent) {
-    super(Theme.TYPE, payload);
+  constructor(payload: ThemeEvent, key?: string) {
+    super(Theme.TYPE, payload, key);
   }
 }
 

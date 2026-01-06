@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Interceptor, intercept } from 'ngx-event-bus';
 
+//import { Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
+
 import { ProductsService } from '../products';
 import { GEventTypes, ThemeEvent } from '../interfaces';
 
@@ -10,7 +12,6 @@ import { GEventTypes, ThemeEvent } from '../interfaces';
 @Component({
   selector: 'app-board',
   imports: [],
-  providers: [ProductsService],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })

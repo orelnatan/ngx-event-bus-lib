@@ -1,5 +1,7 @@
 import { Directive } from '@angular/core';
+
 import { Interceptor, intercept } from 'ngx-event-bus';
+//import { Interceptor, intercept} from '../../../projects/ngx-event-bus/src/public-api';
 
 import { GEventTypes, ThemeEvent } from '../interfaces';
 
@@ -10,7 +12,6 @@ import { GEventTypes, ThemeEvent } from '../interfaces';
   selector: '[appImageNotFound]',
 })
 export class ImageNotFound {
-
   constructor() {
     intercept(this);
   }

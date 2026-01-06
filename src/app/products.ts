@@ -6,7 +6,9 @@ import { GEventTypes, ThemeEvent } from './interfaces';
 @Interceptor([
   { type: GEventTypes.Theme, action: "theme" },
 ])
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class ProductsService {
   constructor() {
     intercept(this);

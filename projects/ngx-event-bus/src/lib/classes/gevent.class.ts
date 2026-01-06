@@ -15,14 +15,19 @@ export class GEvent<T extends string, P = null> {
   /** The strongly-typed payload of the event */
   readonly payload?: P;
 
-  /**
+  /** Optional key used to scope or target the event */
+  readonly key?: string;
+
+ /**
    * Creates a new typed event instance.
    *
-   * @param type - The event type string.
-   * @param payload - The event payload (any type, optional).
-   */
-  constructor(type: T, payload?: P) {
+   * @param type - The event type identifier.
+   * @param payload - Optional event payload.
+   * @param key - Optional key used to target specific interceptors.
+  */
+  constructor(type: T, payload?: P, key?: string) {
     this.type = type;
     this.payload = payload;
+    this.key = key;
   }
 }
