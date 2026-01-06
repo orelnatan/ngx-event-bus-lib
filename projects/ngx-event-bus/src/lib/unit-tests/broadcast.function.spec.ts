@@ -72,4 +72,17 @@ describe('broadcast', () => {
       )
     ).toBe(false);
   });
+
+  it('should dispatch event with null payload when payload is null', () => {
+    const event = new GEvent<'TEST_EVENT', null>('TEST_EVENT', null);
+
+    broadcast(event);
+
+    expect(dispatchSpy).toHaveBeenCalledTimes(1);
+
+    const dispatchedEvent = dispatchSpy.mock.calls[0][0] as CustomEvent;
+
+    expect(dispatchedEvent.detail).toBeDefined();
+    expect(dispatchedEvent.detail.data).toBeNull();
+  });
 });
