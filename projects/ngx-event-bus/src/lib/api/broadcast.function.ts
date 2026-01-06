@@ -22,7 +22,7 @@ import { PAYLOAD_PROTOTYPE } from "../consts";
  * @template P - Type of the event payload.
  *
  * @param event - The typed event instance to broadcast.
- */
+*/
 export function broadcast<T extends string, P = null>(
   event: GEvent<T, P>
 ): void {
@@ -32,6 +32,7 @@ export function broadcast<T extends string, P = null>(
     data: event.payload || null,
     key: event.key
   });
+  
   window.dispatchEvent(
     new CustomEvent(event.type, {
       detail: trustedPayload,

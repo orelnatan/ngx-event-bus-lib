@@ -88,4 +88,44 @@ describe('initListeners', () => {
       'Interceptor error: "missingHandler" is not a function'
     );
   });
+
+  it('should ignore event when key does not match interceptor key', () => {
+    const handlerSpy = vi.fn();
+
+    const instance = {
+      onTheme: handlerSpy,
+    };
+
+    const events = [
+      {
+        type: 'THEME',
+        action: 'onTheme',
+        key: 'EXPECTED_KEY',
+      },
+    ];
+
+    // Capture the listener callback passed to renderer2.listen
+    let listener: Function;
+
+    (renderer2.listen as unknown as any).mockImplementation(
+      (_host: any, _type: any, callback: any) => {
+        listener = callback;
+        return vi.fn(); // unsubscribe function
+      }
+    );
+
+    // Initialize listeners
+    initListeners(events as any, instance as any, renderer2);
+
+    // Create a trusted payload with a mismatched key
+    const trustedPayload = Object.create(PAYLOAD_PROTOTYPE);
+    trustedPayload.data = { mode: 'DARK' };
+    trustedPayload.key = 'WRONG_KEY';
+
+    // Fire the listener
+    listener!({ detail: trustedPayload });
+
+    // Guard 2 should prevent calling the interceptor action
+    expect(handlerSpy).not.toHaveBeenCalled();
+  });
 });
