@@ -12,11 +12,11 @@ describe('intercept', () => {
       .toThrowError(/intercept\(\) function cannot be used/);
   });
 
-  it('should call _constructor if DECORATOR_APPLIED is present', () => {
+  it('should call _intercept if DECORATOR_APPLIED is present', () => {
     const _constructorMock = vi.fn();
 
     class Decorated {
-      _constructor(instance: any) {
+      _intercept(instance: any) {
         _constructorMock(instance);
       }
     }
@@ -29,11 +29,11 @@ describe('intercept', () => {
     expect(_constructorMock).toHaveBeenCalledWith(instance);
   });
 
-  it('should call _constructor exactly once', () => {
+  it('should call _intercept exactly once', () => {
     const _constructorMock = vi.fn();
 
     class Decorated {
-      _constructor(instance: any) {
+      _intercept(instance: any) {
         _constructorMock(instance);
       }
     }
@@ -44,7 +44,7 @@ describe('intercept', () => {
     intercept(instance);
     intercept(instance); // call again
 
-    // Check that _constructor was called twice because we manually called intercept twice
+    // Check that _intercept was called twice because we manually called intercept twice
     expect(_constructorMock).toHaveBeenCalledTimes(2);
   });
 
@@ -53,7 +53,7 @@ describe('intercept', () => {
 
     class Decorated {
       value = 42;
-      _constructor(instance: any) {
+      _intercept(instance: any) {
         _constructorMock(instance);
       }
     }

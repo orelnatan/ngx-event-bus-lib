@@ -17,7 +17,7 @@ describe('Interceptor decorator', () => {
     expect((TestClass.prototype as any)[DECORATOR_APPLIED]).toBe(true);
   });
 
-  it('should simulate _constructor and call initListeners', () => {
+  it('should simulate _intercept and call initListeners', () => {
     const events = [{ type: 'click', action: 'handleClick' }];
 
     class TestClass {
@@ -28,7 +28,7 @@ describe('Interceptor decorator', () => {
 
     const instance = new TestClass();
 
-    // --- simulate _constructor manually ---
+    // --- simulate _intercept manually ---
     const mockRenderer2 = { listen: vi.fn() } as unknown as Renderer2;
 
     // Call initListeners manually with spy
@@ -56,8 +56,8 @@ describe('Interceptor decorator', () => {
     // Apply decorator
     Interceptor(events)(TestClass as any);
     
-    // --- MANUALLY simulate _constructor behavior ---
-    // Normally _constructor attaches listeners, we simulate it manually
+    // --- MANUALLY simulate _intercept behavior ---
+    // Normally _intercept attaches listeners, we simulate it manually
     const listeners = [listener1, listener2];
   
     // Decorator replaces ngOnDestroy, so we simulate that
@@ -94,7 +94,7 @@ describe('Interceptor decorator', () => {
     Interceptor(events)(PipeTestClass as any);
     const instance = new PipeTestClass();
   
-    // --- simulate _constructor attaching listeners ---
+    // --- simulate _intercept attaching listeners ---
     const listeners = [listener];
   
     // Simulate pipe's onDestroy (what decorator would attach)
@@ -157,9 +157,9 @@ describe('Interceptor decorator', () => {
     const instance = new PipeClass();
   
     // --- Manually patch the decorator's `listeners` closure ---
-    // Trick: override _constructor to inject fake listeners
+    // Trick: override _intercept to inject fake listeners
     const fakeListeners = [listener1, listener2];
-    (PipeClass.prototype as any)._constructor = function () {
+    (PipeClass.prototype as any)._intercept = function () {
       return fakeListeners;
     };
   

@@ -30,6 +30,6 @@ export function intercept<T>(instance: T): void {
                       'that are not decorated with @Interceptor decorator');
     }
 
-    (instance as InstanceType<U>).constructor.prototype._constructor(instance);
+    (instance as InstanceType<U>).constructor.prototype._intercept(instance);
   })()
 }

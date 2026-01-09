@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Interceptor, broadcast, intercept } from 'ngx-event-bus';
+import { GEvent, Interceptor, broadcast, intercept } from 'ngx-event-bus';
 //import { Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { ImageNotFound } from './image-not-found';
@@ -27,7 +27,9 @@ export class Home {
   }
 
   theme(payload: ThemeEvent): void {
-    console.log("theme intercepted in Home Component, ", payload);
+   // console.log("theme intercepted in Home Component, ", payload);
+
+    broadcast(new GEvent("GOT_IT", { name: Home }));
   }
 
   locale(payload: LocaleEvent): void {

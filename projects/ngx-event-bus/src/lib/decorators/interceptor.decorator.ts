@@ -26,7 +26,7 @@ export function Interceptor<T extends Args>(events: Event[] = []): (orgConstruct
     let listeners: Function[] = [];
   
     orgConstructor.prototype[DECORATOR_APPLIED] = true;
-    orgConstructor.prototype._constructor = function(instance: InstanceType<T>): void {
+    orgConstructor.prototype._intercept = function(instance: InstanceType<T>): void {
       const rendererFactory: RendererFactory2 = ɵɵdirectiveInject(RendererFactory2);
       const renderer2: Renderer2 = rendererFactory.createRenderer(null, null);
 
