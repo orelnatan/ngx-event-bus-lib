@@ -1,77 +1,207 @@
-# NgxEventBus
+<!-- ![ngx-event-bus cover](https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png) -->
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+<p align="center">
+  <img src="https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png" />
+</p>
 
-## Code scaffolding
+# ngx-event-bus
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
+Broadcast strongly-typed events anywhere in your app and react to them declaratively —
+without services, DI, providers, RxJS, Signals, or tight coupling.
+
+## Motivation
+
+In many Angular applications, **components that are completely unrelated still need to communicate**.
+
+When the app is not built around a state-management solution, a common approach is to introduce a shared service —
+usually based on RxJS `Subject`'s or Signals — and use it as a communication bridge.
+
+This typically requires:
+- Services, providers, and dependency injections
+- RxJS tools or Signals
+- Manual lifecycle handling to avoid memory leaks (in the case of RxJS)
+
+`ngx-event-bus` takes a different approach.
+
+It is built on **native JavaScript events**, automatically manages subscriptions, and requires **no services, no DI, and no module setup or imports**.
+Event handling is simple, declarative, and free from shared state.
+
+## Compatibility 
+
+> ✅ **Angular support:** Angular **v9 and above**
+
+Supports **all Angular entities**:
+
+- Components
+- Directives
+- Services
+- Pipes
+
+## Quick Start 🚀
+
+## Install
 ```bash
-ng generate component component-name
+npm install ngx-event-bus
+# or
+yarn add ngx-event-bus
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
 
+### Broadcasting an event 🛜​
 ```bash
-ng generate --help
+import { broadcast, GEvent } from "ngx-event-bus";
+
+publish(): void {
+  broadcast(
+    new GEvent("MY_EVENT", {
+      metadata: "My event data..."
+    })
+  );
+}
 ```
 
-## Building
+> The event's payload can be **any type of data** — primitives, objects, functions, and more. (If no payload is provided, the default is null)
 
-To build the library, run:
+---
+
+### Intercepting an event 📡
+```bash
+import { Component } from "@angular/core";
+import { Interceptor, intercept } from "ngx-event-bus";
+
+@Interceptor([
+  { type: "MY_EVENT", action: "handleEvent" }
+])
+@Component({
+  selector: "app-home",
+  template: `Home`
+})
+export class HomeComponent {
+  constructor() {
+    intercept(this);
+  }
+
+  handleEvent(payload: { metadata: string }): void {
+    console.log("Event intercepted: ", payload);
+  }
+}
+```
+> ⚠️ Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
+
+> The `@Interceptor` decorator can intercept and handle **any number of events**, without limits.
+
+## 🎯 Targeted Events
+
+By default, events are **broadcast globally** — each interceptor listening to the same event type will receive them.
+
+However, in some scenarios you may want **only specific listeners** to react to an event, even if multiple interceptors are registered for the same type. To support this, events can be optionally sent with a **`key`** (`string`).
+
+### Broadcasting a targeted event 🛜​
 
 ```bash
-ng build ngx-event-bus
+publish(): void {
+  broadcast(
+    new GEvent("MY_EVENT", {
+      metadata: "My event data..."
+    }, "BUS::MY_EVENT::A9F3-77XQ") // 🔑​
+  );
+}
 ```
 
-Or for Production:
-
-ng build ngx-event-bus --configuration production
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-event-bus
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Intercepting a targeted event 📡
 
 ```bash
-ng test
+@Interceptor([
+  { type: "MY_EVENT", action: "handleTargetedEvent", key: "BUS::MY_EVENT::A9F3-77XQ" }
+])
+@Component({
+  selector: "app-home",
+  template: `Home`
+})
+export class HomeComponent {
+  constructor() {
+    intercept(this);
+  }
+
+  handleTargetedEvent(): void {
+    console.log("Will be triggered only if the key matches...");
+  }
+}
 ```
+> Events broadcast with a mismatched key will be **rejected** by the `@Interceptor` ❌
 
-## Running unit-tests(lib)
 
-Run the command: ng test ngx-event-bus
+## Advanced Usage ⚡
 
-## Running unit-tests with coverage(lib)
+`ngx-event-bus` supports **fully-typed events** in 3 different levels, from quick-and-loose to fully enforced best practices.  
 
-Run the command ng test ngx-event-bus --coverage
+---
 
-## Running end-to-end tests
+### 1️⃣ Loose / Quick Usage
+```bash
+broadcast(new GEvent("MY_EVENT", {
+  metadata: "Quick, untyped payload"
+}));
+```
+- ✅ Fast — minimal setup, just fire-and-forget.  
+- ✅ Flexible — any shape of payload is allowed.  
+- ❌ No type safety (developer choice)
 
-For end-to-end (e2e) testing, run:
+### 2️⃣ Generic enforce - Strongly Typed 
+```bash
+broadcast(
+  new GEvent<"MY_EVENT", { metadata: string }>("MY_EVENT", {
+    metadata: "Payload and event name are generic enforced.
+  })
+);
+```
+Or even smarter, with Enums/types and interfaces
 
 ```bash
-ng e2e
+enum MyEventTypes {
+  MyEvent = "MY_EVENT"
+}
+
+interface MyEventPayload {
+  metadata: string;
+}
+
+broadcast(
+ new GEvent<MyEventTypes.MyEvent, MyEventPayload>(
+   MyEventTypes.MyEvent, {
+     metadata: "Payload and event name are generic enforced.
+   })
+);
 ```
+- ✅ Payload enforced — TypeScript ensures payload shape is correct.
+- ✅ Event names centralized — reduces typos and keeps event names consistent.
+- ✅ Better developer experience — IDE autocompletion works.
+- ❌ Event–payload relationship not fully enforced — nothing prevents using the wrong payload with a given event type.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 3️⃣ Fully Enforced, Best Practice 🥇
+By extending the `GEvent` class, you can create your own fully enforced events. This ensures **both the event type and its payload are strictly typed**, making your code refactor-safe and perfect for large apps.
 
-## Additional Resources
+```bash
+import { GEvent, broadcast } from 'ngx-event-bus';
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+export class MyEvent extends GEvent<MyEventTypes.MyEvent, MyEventPayload> {
+  static readonly TYPE = MyEventTypes.MyEvent;
 
-https://medium.com/angular-in-depth/complete-beginner-guide-to-publish-an-angular-library-to-npm-d42343801660
+  constructor(payload: MyEventPayload) {
+    super(MyEvent.TYPE, payload);
+  }
+}
+
+broadcast(
+  new MyEvent({
+    metadata: "Fully typed and refactor-safe!"
+  })
+);
+```
+- ✅ Fully typed — TypeScript strictly enforces both event type and payload, guaranteeing their correct relationship.
+- ✅ Refactor-safe — renaming the event or payload interface will automatically propagate errors if used incorrectly.
+- ✅ Best developer experience — IDE autocompletion, type-checking, and maintainability are maximized.
+- ✅ Large-app ready — ideal for apps with many events and complex interactions.

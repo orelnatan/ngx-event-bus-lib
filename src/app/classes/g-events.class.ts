@@ -26,4 +26,3 @@ export class Locale extends GEvent<GEventTypes.Locale, LocaleEvent> {
     super(Locale.TYPE, payload);
   }
 }
-

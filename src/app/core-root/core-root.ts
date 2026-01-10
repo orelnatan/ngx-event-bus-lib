@@ -1,17 +1,26 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
-import { GEvent, Interceptor, broadcast, intercept } from 'ngx-event-bus';
-//import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
+import { GEvent, broadcast } from 'ngx-event-bus';
 
-import { Locale, Logout, Theme } from '../classes/g-events.class';
-import { GEventTypes, LocaleEvent, ThemeEvent } from '../interfaces';
+import { GEventTypes } from '../interfaces';
 
-export const TRUSTED_EVENT: symbol = Symbol('__trustedEvent');
+enum MyEventTypes {
+  MyEvent = "MY_EVENT"
+}
 
-@Interceptor([
-  { type: "GOT_IT", action: "gotIt" },
-])
+interface MyEventPayload {
+  metadata: string;
+}
+
+export class MyEvent extends GEvent<MyEventTypes.MyEvent, MyEventPayload> {
+  static readonly TYPE = MyEventTypes.MyEvent;
+
+  constructor(payload: MyEventPayload) {
+    super(MyEvent.TYPE, payload);
+  }
+}
+
 @Component({
   selector: 'app-core-root',
   imports: [RouterOutlet, RouterLinkWithHref, RouterLinkActive],
@@ -19,29 +28,11 @@ export const TRUSTED_EVENT: symbol = Symbol('__trustedEvent');
   styleUrl: './core-root.scss',
 })
 export class CoreRoot {
-  constructor() {
-    intercept(this);
-  }
-
-  broadcastLogout(): void {
-    broadcast(new Logout());
-  }
-
-  broadcastTheme(): void {
-    broadcast(new Theme({
-      mode: "LIGHT",
-      brightness: 32
-    }));
-  }
-
-  broadcastLocale(): void {
-    broadcast(new Locale({
-      lang: "en_US",
-      dir: "lr"
-    }));
-  }
-
-  gotIt(data: { name: string }): void {
-    console.log(data);
+  publish(): void {
+    broadcast(
+      new GEvent("MY_EVENT", {
+        metadata: "My event data..."
+      }, "BUS::MY_EVENT::A9F3-77XQ") 
+    );
   }
 }

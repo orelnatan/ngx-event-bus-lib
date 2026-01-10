@@ -7,7 +7,7 @@ import { ProductsService } from '../products';
 import { GEventTypes, ThemeEvent } from '../interfaces';
 
 @Interceptor([
-  { type: GEventTypes.Theme, action: "theme" },
+  { type: GEventTypes.Theme, action: "theme", key: "XXX432432432" },
 ])
 @Component({
   selector: 'app-board',

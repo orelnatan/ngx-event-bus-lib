@@ -7,9 +7,7 @@ import { GEventTypes, LocaleEvent, ThemeEvent } from '../interfaces';
 import { Theme } from '../classes/g-events.class';
 
 @Interceptor([
-  { type: GEventTypes.Logout, action: "logout" },
-  { type: GEventTypes.Theme, action: "theme" },
-  { type: GEventTypes.Locale, action: "locale" },
+  { type: "MY_EVENT", action: "handleEvent", key: "BUS::MY_EVENT::A9F3-77XQ" },
 ])
 @Component({
   selector: 'app-home',
@@ -22,7 +20,7 @@ export class Home {
     intercept(this);
   } 
 
-  logout(payload: {}): void {
+  handleEvent(payload: {}): void {
     console.log("logout intercepted in Home Component, ", payload);
   }
 
