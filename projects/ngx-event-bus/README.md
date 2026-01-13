@@ -1,10 +1,10 @@
-<!-- ![ngx-event-bus cover](https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png) -->
-
-<p align="center">
-  <img src="https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png" />
-</p>
+![ngx-event-bus cover](https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png)
 
 # ngx-event-bus
+
+[![npm version](https://img.shields.io/npm/v/ngx-event-bus.svg?style=flat-square)](https://www.npmjs.com/package/ngx-event-bus)
+[![Angular](https://img.shields.io/badge/Angular-9%2B-red?style=flat-square)](https://angular.io/)
+[![License](https://img.shields.io/npm/l/ngx-event-bus?style=flat-square)](LICENSE)
 
 **A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
@@ -25,8 +25,7 @@ This typically requires:
 
 `ngx-event-bus` takes a different approach.
 
-It is built on **native JavaScript events**, automatically manages subscriptions, and requires **no services, no DI, and no module setup or imports**.
-Event handling is simple, declarative, and free from shared state.
+It is built on **native JavaScript events**, automatically adds and removes event listeners to prevent **memory leaks**, and requires **no services, no DI, and no module setup or imports**. Event handling is simple, declarative, and free from shared state.
 
 ## Compatibility 
 
@@ -43,15 +42,20 @@ Supports **all Angular entities**:
 
 ## Install
 ```bash
+# npm
 npm install ngx-event-bus
-# or
+
+# yarn
 yarn add ngx-event-bus
+
+# pnpm
+pnpm add ngx-event-bus
 ```
 
 ## Usage
 
 ### Broadcasting an event 🛜​
-```bash
+```ts
 import { broadcast, GEvent } from "ngx-event-bus";
 
 publish(): void {
@@ -68,7 +72,7 @@ publish(): void {
 ---
 
 ### Intercepting an event 📡
-```bash
+```ts
 import { Component } from "@angular/core";
 import { Interceptor, intercept } from "ngx-event-bus";
 
@@ -101,7 +105,7 @@ However, in some scenarios you may want **only specific listeners** to react to 
 
 ### Broadcasting a targeted event 🛜​
 
-```bash
+```ts
 publish(): void {
   broadcast(
     new GEvent("MY_EVENT", {
@@ -113,7 +117,7 @@ publish(): void {
 
 ### Intercepting a targeted event 📡
 
-```bash
+```ts
 @Interceptor([
   { type: "MY_EVENT", action: "handleTargetedEvent", key: "BUS::MY_EVENT::A9F3-77XQ" }
 ])
@@ -141,7 +145,7 @@ export class HomeComponent {
 ---
 
 ### 1️⃣ Loose / Quick Usage
-```bash
+```ts
 broadcast(new GEvent("MY_EVENT", {
   metadata: "Quick, untyped payload"
 }));
@@ -151,7 +155,7 @@ broadcast(new GEvent("MY_EVENT", {
 - ❌ No type safety (developer choice)
 
 ### 2️⃣ Generic enforce - Strongly Typed 
-```bash
+```ts
 broadcast(
   new GEvent<"MY_EVENT", { metadata: string }>("MY_EVENT", {
     metadata: "Payload and event name are generic enforced.
@@ -160,7 +164,7 @@ broadcast(
 ```
 Or even smarter, with Enums/types and interfaces
 
-```bash
+```ts
 enum MyEventTypes {
   MyEvent = "MY_EVENT"
 }
@@ -184,7 +188,7 @@ broadcast(
 ### 3️⃣ Fully Enforced, Best Practice 🥇
 By extending the `GEvent` class, you can create your own fully enforced events. This ensures **both the event type and its payload are strictly typed**, making your code refactor-safe and perfect for large apps.
 
-```bash
+```ts
 import { GEvent, broadcast } from 'ngx-event-bus';
 
 export class MyEvent extends GEvent<MyEventTypes.MyEvent, MyEventPayload> {
@@ -205,3 +209,12 @@ broadcast(
 - ✅ Refactor-safe — renaming the event or payload interface will automatically propagate errors if used incorrectly.
 - ✅ Best developer experience — IDE autocompletion, type-checking, and maintainability are maximized.
 - ✅ Large-app ready — ideal for apps with many events and complex interactions.
+
+---
+
+## Final Thoughts ✨
+
+`ngx-event-bus` is designed to scale with your application — from small components to large, event-rich Angular systems.
+
+It removes boilerplate, enforces correctness at compile time, and lets you focus on **intent**, not wiring.
+If your app relies on clean, decoupled communication, this library is built for you.
