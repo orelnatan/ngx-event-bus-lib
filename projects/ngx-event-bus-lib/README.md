@@ -37,7 +37,7 @@ It is built on **native JavaScript events**, automatically adds and removes even
 
 ## Compatibility 
 
-✅ **Angular support:** Angular **v9 and above**
+✅&ensp;**Angular support:** Angular **v9 and above**
 
 Supports **all Angular entities**:
 
@@ -46,7 +46,7 @@ Supports **all Angular entities**:
 - Services
 - Pipes
 
-## Quick Start 🚀
+## Quick Start&ensp;🚀
 
 ## Install
 ```bash
@@ -62,7 +62,7 @@ pnpm add ngx-event-bus-lib
 
 ## Usage
 
-### Broadcasting an event 🛜​
+### Broadcasting an event&ensp;🛜​
 ```ts
 import { broadcast, GEvent } from "ngx-event-bus-lib";
 
@@ -79,7 +79,7 @@ publish(): void {
 
 ---
 
-### Intercepting an event 📡
+### Intercepting an event&ensp;📡
 ```ts
 import { Component } from "@angular/core";
 import { Interceptor, intercept } from "ngx-event-bus-lib";
@@ -101,17 +101,17 @@ export class HomeComponent {
   }
 }
 ```
-- ⚠️ Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
+- ⚠️&ensp;Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
 
 - The `@Interceptor` decorator can intercept and handle **any number of events**, without limits.
 
-## 🎯 Targeted Events
+## 🎯&ensp;Targeted Events
 
 By default, events are **broadcast globally** — each interceptor listening to the same event type will receive them.
 
 However, in some scenarios you may want **only specific listeners** to react to an event, even if multiple interceptors are registered for the same type. To support this, events can be optionally sent with a **`key`** (`string`).
 
-### Broadcasting a targeted event 🛜​
+### Broadcasting a targeted event&ensp;🛜​
 
 ```ts
 publish(): void {
@@ -123,7 +123,7 @@ publish(): void {
 }
 ```
 
-### Intercepting a targeted event 📡
+### Intercepting a targeted event&ensp;📡
 
 ```ts
 @Interceptor([
@@ -143,26 +143,26 @@ export class HomeComponent {
   }
 }
 ```
-- Events broadcast with a mismatched key will be **rejected** by the `@Interceptor` ❌
+- Events broadcast with a mismatched key will be **rejected** by the `@Interceptor`&ensp;❌
 
 
-## Advanced Usage ⚡
+## Advanced Usage&ensp;⚡
 
 `ngx-event-bus` supports **fully-typed events** in 3 different levels, from quick-and-loose to fully enforced best practices.  
 
 ---
 
-### 1️⃣ Loose / Quick Usage
+### 1️⃣&ensp;Loose / Quick Usage
 ```ts
 broadcast(new GEvent("MY_EVENT", {
   metadata: "Quick, untyped payload"
 }));
 ```
-- ✅ Fast — minimal setup, just fire-and-forget.  
-- ✅ Flexible — any shape of payload is allowed.  
-- ❌ No type safety (developer choice)
+- ✅&ensp;Fast — minimal setup, just fire-and-forget.  
+- ✅&ensp;Flexible — any shape of payload is allowed.  
+- ❌&ensp;No type safety (developer choice)
 
-### 2️⃣ Generic enforce - Strongly Typed 
+### 2️⃣&ensp;Generic enforce - Strongly Typed 
 ```ts
 broadcast(
   new GEvent<"MY_EVENT", { metadata: string }>("MY_EVENT", {
@@ -188,12 +188,12 @@ broadcast(
    })
 );
 ```
-- ✅ Payload enforced — TypeScript ensures payload shape is correct.
-- ✅ Event names centralized — reduces typos and keeps event names consistent.
-- ✅ Better developer experience — IDE autocompletion works.
-- ❌ Event–payload relationship not fully enforced — nothing prevents using the wrong payload with a given event type.
+- ✅&ensp;Payload enforced — TypeScript ensures payload shape is correct.
+- ✅&ensp;Event names centralized — reduces typos and keeps event names consistent.
+- ✅&ensp;Better developer experience — IDE autocompletion works.
+- ❌&ensp;Event–payload relationship not fully enforced — nothing prevents using the wrong payload with a given event type.
 
-### 3️⃣ Fully Enforced, Best Practice 🥇
+### 3️⃣&ensp;Fully Enforced, Best Practice&ensp;🥇
 By extending the `GEvent` class, you can create your own fully enforced events. This ensures **both the event type and its payload are strictly typed**, making your code refactor-safe and perfect for large apps.
 
 ```ts
@@ -213,14 +213,14 @@ broadcast(
   })
 );
 ```
-- ✅ Fully typed — TypeScript strictly enforces both event type and payload, guaranteeing their correct relationship.
-- ✅ Refactor-safe — renaming the event or payload interface will automatically propagate errors if used incorrectly.
-- ✅ Best developer experience — IDE autocompletion, type-checking, and maintainability are maximized.
-- ✅ Large-app ready — ideal for apps with many events and complex interactions.
+- ✅&ensp;Fully typed — TypeScript strictly enforces both event type and payload, guaranteeing their correct relationship.
+- ✅&ensp;Refactor-safe — renaming the event or payload interface will automatically propagate errors if used incorrectly.
+- ✅&ensp;Best developer experience — IDE autocompletion, type-checking, and maintainability are maximized.
+- ✅&ensp;Large-app ready — ideal for apps with many events and complex interactions.
 
 ---
 
-## Final Thoughts ✨
+## Final Thoughts&ensp;✨
 
 `ngx-event-bus` is designed to scale with your application — from small components to large, event-rich Angular systems.
 
