@@ -9,6 +9,9 @@
       ],
       "ngx-event-bus": [
         "./dist/ngx-event-bus"
+      ],
+      "ngx-event-bus-lib": [
+        "./dist/ngx-event-bus-lib"
       ]
     },
     "strict": true,
@@ -49,6 +52,12 @@
     },
     {
       "path": "./projects/ngx-event-bus/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-event-bus-lib/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-event-bus-lib/tsconfig.spec.json"
     }
   ]
 }

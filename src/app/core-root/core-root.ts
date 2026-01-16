@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
-import { GEvent, broadcast } from 'ngx-event-bus';
+import { GEvent, broadcast } from 'ngx-event-bus-lib';
 
 import { GEventTypes } from '../interfaces';
 

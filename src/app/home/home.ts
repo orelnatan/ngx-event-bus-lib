@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GEvent, Interceptor, broadcast, intercept } from 'ngx-event-bus';
+import { GEvent, Interceptor, broadcast, intercept } from 'ngx-event-bus-lib';
 //import { Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { ImageNotFound } from './image-not-found';

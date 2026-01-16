@@ -137,6 +137,7 @@ For more information on using the Angular CLI, including detailed command refere
 https://medium.com/angular-in-depth/complete-beginner-guide-to-publish-an-angular-library-to-npm-d42343801660
 
 
-Token from NPM for the lib
-//registry.npmjs.org/:_authToken=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
+Create the file ".npmrc" inside the dist/<lib> folder, and put the content:
+
+//registry.npmjs.org/:_authToken=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   // Token from NPM for the lib
 

@@ -1,4 +1,4 @@
-import { GEvent, broadcast } from 'ngx-event-bus';
+import { GEvent, broadcast } from 'ngx-event-bus-lib';
 //import { GEvent, broadcast } from '../../../projects/ngx-event-bus/src/public-api';
 
 import { GEventTypes, LocaleEvent, ThemeEvent } from "../interfaces";

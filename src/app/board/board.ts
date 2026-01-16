@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Interceptor, intercept } from 'ngx-event-bus';
+import { Interceptor, intercept } from 'ngx-event-bus-lib';
 
 //import { Interceptor, broadcast, intercept } from '../../../projects/ngx-event-bus/src/public-api';
 

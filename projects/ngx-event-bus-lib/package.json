@@ -1,6 +1,6 @@
 {
   "name": "ngx-event-bus-lib",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "author": "Orel Naten <natenorel@gmail.com>",
   "description": "Broadcast cross-system Angular events — no services, zero DI/providers, zero RxJS/signals, zero leaks, fully typed and effortless.",
   "keywords": [
@@ -24,23 +24,11 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": ">=9.0.0",
-    "@angular/common": ">=9.0.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "main": "bundles/ngx-event-bus.umd.js",
-  "module": "fesm2020/ngx-event-bus.mjs",
-  "es2020": "fesm2020/ngx-event-bus.mjs",
-  "fesm2020": "fesm2020/ngx-event-bus.mjs",
-  "typings": "ngx-event-bus.d.ts",
-  "files": [
-    "bundles",
-    "fesm2020",
-    "ngx-event-bus.d.ts",
-    "README.md",
-    "package.json"
-  ]
+  "sideEffects": false
 }

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Interceptor, broadcast, intercept } from 'ngx-event-bus';
+import { Interceptor, broadcast, intercept } from 'ngx-event-bus-lib';
 
 import { GEventTypes, ThemeEvent } from '../interfaces';
 import { Theme } from '../classes/g-events.class';

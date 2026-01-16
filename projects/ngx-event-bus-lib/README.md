@@ -1,10 +1,16 @@
-![ngx-event-bus cover](https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png)
+<p align="center">
+  <a>
+    <picture>
+      <img alt="Ngx Event Bus" src="https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png">
+    </picture>
+  </a>
+</p>
 
 # ngx-event-bus
 
-[![npm version](https://img.shields.io/npm/v/ngx-event-bus.svg?style=flat-square)](https://www.npmjs.com/package/ngx-event-bus)
+[![npm version](https://img.shields.io/npm/v/ngx-event-bus-lib.svg?style=flat-square)](https://www.npmjs.com/package/ngx-event-bus-lib)
 [![Angular](https://img.shields.io/badge/Angular-9%2B-red?style=flat-square)](https://angular.io/)
-[![License](https://img.shields.io/npm/l/ngx-event-bus?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/npm/l/ngx-event-bus-lib?style=flat-square)](LICENSE)
 
 **A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
@@ -29,7 +35,7 @@ It is built on **native JavaScript events**, automatically adds and removes even
 
 ## Compatibility 
 
-> ✅ **Angular support:** Angular **v9 and above**
+✅ **Angular support:** Angular **v9 and above**
 
 Supports **all Angular entities**:
 
@@ -56,7 +62,7 @@ pnpm add ngx-event-bus-lib
 
 ### Broadcasting an event 🛜​
 ```ts
-import { broadcast, GEvent } from "ngx-event-bus";
+import { broadcast, GEvent } from "ngx-event-bus-lib";
 
 publish(): void {
   broadcast(
@@ -67,14 +73,14 @@ publish(): void {
 }
 ```
 
-> The event's payload can be **any type of data** — primitives, objects, functions, and more. (If no payload is provided, the default is null)
+- The event's payload can be **any type of data** — primitives, objects, functions, and more. (If no payload is provided, the default is null)
 
 ---
 
 ### Intercepting an event 📡
 ```ts
 import { Component } from "@angular/core";
-import { Interceptor, intercept } from "ngx-event-bus";
+import { Interceptor, intercept } from "ngx-event-bus-lib";
 
 @Interceptor([
   { type: "MY_EVENT", action: "handleEvent" }
@@ -93,9 +99,9 @@ export class HomeComponent {
   }
 }
 ```
-> ⚠️ Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
+- ⚠️ Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
 
-> The `@Interceptor` decorator can intercept and handle **any number of events**, without limits.
+- The `@Interceptor` decorator can intercept and handle **any number of events**, without limits.
 
 ## 🎯 Targeted Events
 
@@ -135,7 +141,7 @@ export class HomeComponent {
   }
 }
 ```
-> Events broadcast with a mismatched key will be **rejected** by the `@Interceptor` ❌
+- Events broadcast with a mismatched key will be **rejected** by the `@Interceptor` ❌
 
 
 ## Advanced Usage ⚡
@@ -189,7 +195,7 @@ broadcast(
 By extending the `GEvent` class, you can create your own fully enforced events. This ensures **both the event type and its payload are strictly typed**, making your code refactor-safe and perfect for large apps.
 
 ```ts
-import { GEvent, broadcast } from 'ngx-event-bus';
+import { GEvent, broadcast } from 'ngx-event-bus-lib';
 
 export class MyEvent extends GEvent<MyEventTypes.MyEvent, MyEventPayload> {
   static readonly TYPE = MyEventTypes.MyEvent;

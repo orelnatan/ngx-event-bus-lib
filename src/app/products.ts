@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Interceptor, intercept } from 'ngx-event-bus';
+import { Interceptor, intercept } from 'ngx-event-bus-lib';
 
 import { GEventTypes, ThemeEvent } from './interfaces';
 
