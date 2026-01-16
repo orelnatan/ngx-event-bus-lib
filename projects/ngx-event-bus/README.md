@@ -43,13 +43,13 @@ Supports **all Angular entities**:
 ## Install
 ```bash
 # npm
-npm install ngx-event-bus
+npm install ngx-event-bus-lib
 
 # yarn
-yarn add ngx-event-bus
+yarn add ngx-event-bus-lib
 
 # pnpm
-pnpm add ngx-event-bus
+pnpm add ngx-event-bus-lib
 ```
 
 ## Usage
