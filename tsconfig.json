@@ -42,16 +42,16 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngx-event-bus/tsconfig.lib.json"
+      "path": "./projects/ngx-event-bus-lib/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngx-event-bus/tsconfig.spec.json"
+      "path": "./projects/ngx-event-bus-lib/tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngx-event-bus/tsconfig.lib.json"
+      "path": "./projects/ngx-event-bus-lib/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngx-event-bus/tsconfig.spec.json"
+      "path": "./projects/ngx-event-bus-lib/tsconfig.spec.json"
     },
     {
       "path": "./projects/ngx-event-bus-lib/tsconfig.lib.json"

@@ -77,17 +77,17 @@
     "NgxEventBus": {
       "projectType": "library",
       "root": "projects/ngx-event-bus",
-      "sourceRoot": "projects/ngx-event-bus/src",
+      "sourceRoot": "projects/ngx-event-bus-lib/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-event-bus/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-event-bus-lib/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-event-bus/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-event-bus-lib/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -95,7 +95,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ngx-event-bus/tsconfig.spec.json"
+            "tsConfig": "projects/ngx-event-bus-lib/tsconfig.spec.json"
           }
         }
       }
@@ -103,17 +103,17 @@
     "ngx-event-bus": {
       "projectType": "library",
       "root": "projects/ngx-event-bus",
-      "sourceRoot": "projects/ngx-event-bus/src",
+      "sourceRoot": "projects/ngx-event-bus-lib/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-event-bus/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-event-bus-lib/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-event-bus/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-event-bus-lib/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -121,7 +121,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ngx-event-bus/tsconfig.spec.json"
+            "tsConfig": "projects/ngx-event-bus-lib/tsconfig.spec.json"
           }
         }
       }

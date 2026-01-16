@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 import { Interceptor, intercept } from 'ngx-event-bus-lib';
-//import { Interceptor, intercept} from '../../../projects/ngx-event-bus/src/public-api';
+//import { Interceptor, intercept} from '../../../projects/ngx-event-bus-lib/src/public-api';
 
 import { GEventTypes, ThemeEvent } from '../interfaces';
 
