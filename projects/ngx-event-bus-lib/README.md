@@ -1,9 +1,11 @@
 <p align="center">
-  <a>
-    <picture>
-      <img alt="Ngx Event Bus" src="https://i.ibb.co/rftSpnds/ngx-event-bus-lib-cover-by-oreate-light-V2-ORG.png">
-    </picture>
-  </a>
+  <picture>
+    <img
+      alt="Ngx Event Bus"
+      src="./ngx-event-bus-lib-cover.jpg"
+      width="100%"
+    />
+  </picture>
 </p>
 
 # ngx-event-bus

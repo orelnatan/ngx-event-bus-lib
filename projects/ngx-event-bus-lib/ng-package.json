@@ -3,5 +3,9 @@
   "dest": "../../dist/ngx-event-bus-lib",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "README.md",
+    "ngx-event-bus-lib-cover.jpg"
+  ]
 }
