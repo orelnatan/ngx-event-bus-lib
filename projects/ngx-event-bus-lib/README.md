@@ -2,7 +2,7 @@
   <picture>
     <img
       alt="Ngx Event Bus"
-      src="./ngx-event-bus-lib-cover.jpg"
+      src="https://github.com/orelnatan/ngx-event-bus-lib/blob/master/projects/ngx-event-bus-lib/ngx-event-bus-lib-cover.jpg"
       width="100%"
     />
   </picture>
