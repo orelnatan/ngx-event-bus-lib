@@ -10,6 +10,9 @@
 
 # ngx-event-bus
 
+[![License](https://img.shields.io/npm/l/on-ngx-event-bus)](https://github.com/orelnatan/ngx-event-bus-lib/blob/master/LICENSE)
+[![Angular](https://img.shields.io/badge/Angular-21+-green)](https://angular.dev)
+
 **A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
 Broadcast strongly-typed events anywhere in your app and react to them declaratively —
