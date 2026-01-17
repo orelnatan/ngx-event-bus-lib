@@ -1,17 +1,17 @@
 {
   "name": "on-ngx-event-bus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Orel Naten <natenorel@gmail.com>",
   "description": "Broadcast cross-system Angular events — no services, zero DI/providers, zero RxJS/signals, zero leaks, fully typed and effortless.",
   "keywords": [
     "angular",
-    "event-bus",
+    "ngx-event-bus",
     "events",
     "global-events",
     "intercept",
     "broadcast",
-    "typed",
-    "lightweight",
+    "on",
+    "global",
     "angular-events"
   ],
   "homepage": "https://github.com/orelnatan/ngx-event-bus-lib",
@@ -30,9 +30,5 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "assets": [
-    "README.md",
-    "ngx-event-bus-lib-cover.jpg"
-  ]
+  "sideEffects": false
 }
