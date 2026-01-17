@@ -10,10 +10,6 @@
 
 # ngx-event-bus
 
-[![npm version](https://img.shields.io/npm/v/ngx-event-bus-lib.svg?style=flat-square)](https://www.npmjs.com/package/ngx-event-bus-lib)
-[![Angular](https://img.shields.io/badge/Angular-9%2B-red?style=flat-square)](https://angular.io/)
-[![License](https://img.shields.io/npm/l/ngx-event-bus-lib?style=flat-square)](LICENSE)
-
 **A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
 Broadcast strongly-typed events anywhere in your app and react to them declaratively —
@@ -51,20 +47,20 @@ Supports **all Angular entities**:
 ## Install
 ```bash
 # npm
-npm install ngx-event-bus-lib
+npm install on-ngx-event-bus
 
 # yarn
-yarn add ngx-event-bus-lib
+yarn add on-ngx-event-bus
 
 # pnpm
-pnpm add ngx-event-bus-lib
+pnpm add on-ngx-event-bus
 ```
 
 ## Usage
 
 ### Broadcasting an event&ensp;🛜​
 ```ts
-import { broadcast, GEvent } from "ngx-event-bus-lib";
+import { broadcast, GEvent } from "on-ngx-event-bus";
 
 publish(): void {
   broadcast(
@@ -82,7 +78,7 @@ publish(): void {
 ### Intercepting an event&ensp;📡
 ```ts
 import { Component } from "@angular/core";
-import { Interceptor, intercept } from "ngx-event-bus-lib";
+import { Interceptor, intercept } from "on-ngx-event-bus";
 
 @Interceptor([
   { type: "MY_EVENT", action: "handleEvent" }
@@ -197,7 +193,7 @@ broadcast(
 By extending the `GEvent` class, you can create your own fully enforced events. This ensures **both the event type and its payload are strictly typed**, making your code refactor-safe and perfect for large apps.
 
 ```ts
-import { GEvent, broadcast } from 'ngx-event-bus-lib';
+import { GEvent, broadcast } from 'on-ngx-event-bus';
 
 export class MyEvent extends GEvent<MyEventTypes.MyEvent, MyEventPayload> {
   static readonly TYPE = MyEventTypes.MyEvent;
