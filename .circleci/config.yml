@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:22.18  # Node 22 LTS compatible with Angular 21
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build Angular library
+          command: npm run build
+      - run:
+          name: Run unit tests
+          command: npx ng test ngx-event-bus-lib --watch=false
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
