@@ -10,6 +10,7 @@
 
 # ngx-event-bus
 
+[![CircleCI](https://circleci.com/gh/orelnatan/ngx-event-bus-lib/tree/master.svg?style=svg)](https://app.circleci.com/pipelines/github/orelnatan/ngx-event-bus-lib)
 [![NPM Version](https://img.shields.io/npm/v/on-ngx-event-bus?color=green)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![License](https://img.shields.io/npm/l/on-ngx-event-bus)](https://github.com/orelnatan/ngx-event-bus-lib/blob/master/LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-21+-green)](https://angular.dev)
