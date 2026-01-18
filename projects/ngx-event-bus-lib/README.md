@@ -10,6 +10,7 @@
 
 # ngx-event-bus
 
+[![NPM Version](https://img.shields.io/npm/v/on-ngx-event-bus?color=green)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![License](https://img.shields.io/npm/l/on-ngx-event-bus)](https://github.com/orelnatan/ngx-event-bus-lib/blob/master/LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-21+-green)](https://angular.dev)
 
@@ -17,6 +18,10 @@
 
 Broadcast strongly-typed events anywhere in your app and react to them declaratively —
 without services, DI, providers, RxJS, Signals, or tight coupling.
+
+<small><i>
+🔹&ensp;The <code>on-</code> prefix is used solely to avoid a naming conflict on npm and has no functional meaning.
+</i></small>
 
 ## Motivation
 
