@@ -13,6 +13,7 @@
 [![NPM Version](https://img.shields.io/npm/v/on-ngx-event-bus?color=green)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![License](https://img.shields.io/npm/l/on-ngx-event-bus)](https://github.com/orelnatan/ngx-event-bus-lib/blob/master/LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-21+-green)](https://angular.dev)
+[![Downloads](https://img.shields.io/npm/dm/on-ngx-event-bus?color=green)](https://www.npmjs.com/package/on-ngx-event-bus)
 
 **A lightweight, fully-tested, type-safe global event bus for Angular — powered by decorators, pure functions, and zero shared state.**
 
@@ -20,7 +21,7 @@ Broadcast strongly-typed events anywhere in your app and react to them declarati
 without services, DI, providers, RxJS, Signals, or tight coupling.
 
 <small><i>
-🔹&ensp;The <code>on-</code> prefix is used solely to avoid a naming conflict on npm and has no functional meaning.
+ ⚠️&ensp;The <code>on-</code> prefix is used solely to avoid a naming conflict on npm and has no functional meaning.
 </i></small>
 
 ## Motivation
@@ -105,7 +106,7 @@ export class HomeComponent {
   }
 }
 ```
-- ⚠️&ensp;Mandatory: Always call intercept(this) in the constructor to activate the `@Interceptor`.
+- ⚠️&ensp;Mandatory: Always call `intercept(this)` in the constructor to activate the `@Interceptor`.
 
 - The `@Interceptor` decorator can intercept and handle **any number of events**, without limits.
 
