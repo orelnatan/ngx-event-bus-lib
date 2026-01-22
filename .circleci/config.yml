@@ -19,13 +19,15 @@ jobs:
           name: Run unit tests with coverage
           command: npx ng test ngx-event-bus-lib --watch=false --coverage
 
+      # 🔍 TEMP DEBUG STEP — ADD THIS
+      - run:
+          name: Debug coverage output
+          command: |
+            echo "=== coverage tree ==="
+            find coverage -type f
+
       - run:
           name: Upload coverage to Codecov
           command: |
             curl -s https://codecov.io/bash | bash -s -- \
               -f coverage/ngx-event-bus-lib/lcov.info
-
-workflows:
-  build-and-test:
-    jobs:
-      - build
