@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA, RendererFactory2, Renderer2, Pipe, PipeTransform, ɵPipeDef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TestBed } from '@angular/core/testing';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { intercept } from '../api';
 import { Interceptor } from '../decorators';
