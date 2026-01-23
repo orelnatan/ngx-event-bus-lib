@@ -1,6 +1,6 @@
 {
   "name": "on-ngx-event-bus",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Orel Naten <natenorel@gmail.com>",
   "description": "Broadcast cross-system Angular events — no services, zero DI/providers, zero RxJS/signals, zero leaks, fully typed and effortless.",
   "keywords": [
