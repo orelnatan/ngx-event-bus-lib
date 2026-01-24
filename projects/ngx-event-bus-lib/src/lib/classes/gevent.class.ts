@@ -8,7 +8,7 @@
  * @template T - Type of the event name. Defaults to `string`, but string literals are recommended.
  * @template P - Type of the event payload. Defaults to `null` if no payload is needed.
 */
-export class GEvent<T extends string, P = null> {
+export class GEvent<T extends string, P = unknown> {
   /** The type of the event */
   readonly type: T;
 

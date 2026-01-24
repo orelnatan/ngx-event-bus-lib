@@ -12,7 +12,7 @@ const mockInitListeners = vi.fn();
 vi.mock('../utils/init-listeners.util', () => ({ initListeners: mockInitListeners }));
 
 // --- Event & Cleanup Mocks ---
-const mockEvent = { type: 'EVENT_TYPE', action: 'handle_event' };
+const mockEvent = { type: 'EVENT_TYPE', action: 'handleEvent' };
 const cleanup1 = vi.fn();
 const cleanup2 = vi.fn();
 mockInitListeners.mockReturnValue([cleanup1, cleanup2]);
@@ -32,7 +32,7 @@ class TestAppComponent {
 
 @Pipe({ name: 'testPipe', standalone: true })
 @Interceptor([mockEvent])
-class TestPipe implements PipeTransform {
+class TestAppPipe implements PipeTransform {
   transform(value: any) {
     return value;
   }
@@ -67,7 +67,7 @@ class MockRenderer implements Renderer2 {
 }
 
 // --- Tests ---
-describe('Interceptor Integration Test (Vitest + standalone)', () => {
+describe('@Interceptor integration tests', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TestAppComponent, RouterOutlet],
@@ -85,7 +85,7 @@ describe('Interceptor Integration Test (Vitest + standalone)', () => {
     expect(instance.constructor.prototype[DECORATOR_APPLIED]).toBe(true);
   });
 
-  it('should cover Pipe onDestroy', () => {
+  it('should remove listeners when the Pipe`s onDestroy is activated', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: RendererFactory2, useValue: { createRenderer: () => new MockRenderer() } }
@@ -94,7 +94,7 @@ describe('Interceptor Integration Test (Vitest + standalone)', () => {
   
     TestBed.runInInjectionContext(() => {
       // Create pipe instance without triggering intercept automatically
-      const pipeInstance = new TestPipe();
+      const pipeInstance = new TestAppPipe();
     
       // Make sure _intercept is called manually
       const proto: any = Object.getPrototypeOf(pipeInstance);
@@ -103,7 +103,7 @@ describe('Interceptor Integration Test (Vitest + standalone)', () => {
       proto._intercept.call(pipeInstance, pipeInstance);
     
       // Now the mock listeners should be attached
-      const pipeDef: ɵPipeDef<TestPipe> = (pipeInstance.constructor as any).ɵpipe;
+      const pipeDef: ɵPipeDef<TestAppPipe> = (pipeInstance.constructor as any).ɵpipe;
     
       // Trigger Pipe onDestroy
       (pipeDef.onDestroy!).call(pipeInstance);

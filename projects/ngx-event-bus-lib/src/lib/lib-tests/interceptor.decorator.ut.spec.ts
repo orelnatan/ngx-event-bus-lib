@@ -5,7 +5,7 @@ import { Interceptor } from '../decorators';
 import { initListeners } from "../utils";
 import { DECORATOR_APPLIED, PAYLOAD_PROTOTYPE } from "../consts";
 
-describe('Interceptor decorator', () => {
+describe('@Interceptor unit-tests', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

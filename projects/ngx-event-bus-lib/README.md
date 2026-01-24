@@ -174,7 +174,7 @@ broadcast(new GEvent("MY_EVENT", {
 ```ts
 broadcast(
   new GEvent<"MY_EVENT", { metadata: string }>("MY_EVENT", {
-    metadata: "Payload and event name are generic enforced.
+    metadata: "Payload and event name are generic enforced."
   })
 );
 ```
@@ -192,7 +192,7 @@ interface MyEventPayload {
 broadcast(
  new GEvent<MyEventTypes.MyEvent, MyEventPayload>(
    MyEventTypes.MyEvent, {
-     metadata: "Payload and event name are generic enforced.
+     metadata: "Payload and event name are generic enforced."
    })
 );
 ```

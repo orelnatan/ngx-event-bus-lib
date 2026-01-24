@@ -23,7 +23,7 @@ import { PAYLOAD_PROTOTYPE } from "../consts";
  *
  * @param event - The typed event instance to broadcast.
 */
-export function broadcast<T extends string, P = null>(
+export function broadcast<T extends string, P = unknown>(
   event: GEvent<T, P>
 ): void {
   const trustedPayload = Object.create(PAYLOAD_PROTOTYPE);
