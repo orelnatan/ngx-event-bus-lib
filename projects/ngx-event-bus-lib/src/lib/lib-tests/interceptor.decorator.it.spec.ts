@@ -86,12 +86,6 @@ describe('@Interceptor integration tests', () => {
   });
 
   it('should remove listeners when the Pipe`s onDestroy is activated', () => {
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: RendererFactory2, useValue: { createRenderer: () => new MockRenderer() } }
-      ]
-    });
-  
     TestBed.runInInjectionContext(() => {
       // Create pipe instance without triggering intercept automatically
       const pipeInstance = new TestAppPipe();

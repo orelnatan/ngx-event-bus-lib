@@ -29,7 +29,7 @@ export function broadcast<T extends string, P = unknown>(
   const trustedPayload = Object.create(PAYLOAD_PROTOTYPE);
 
   Object.assign(trustedPayload, { 
-    data: event.payload || null,
+    data: event.payload ?? null,
     key: event.key
   });
   

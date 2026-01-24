@@ -226,11 +226,19 @@ broadcast(
 - ✅&ensp;Best developer experience — IDE autocompletion, type-checking, and maintainability are maximized.
 - ✅&ensp;Large-app ready — ideal for apps with many events and complex interactions.
 
----
-
 ## Final Thoughts&ensp;✨
 
 `ngx-event-bus` is designed to scale with your application — from small components to large, event-rich Angular systems.
 
 It removes boilerplate, enforces correctness at compile time, and lets you focus on **intent**, not wiring.
 If your app relies on clean, decoupled communication, this library is built for you.
+
+## Help / Support&ensp;💬
+
+If you run into any issues or have questions about using **ngx-event-bus**, feel free to reach out.
+
+📧 Email: [natenorel@gmail.com](mailto:natenorel@gmail.com)
+
+🐞 **Bug reports & feature requests:**  
+Please [open an issue on GitHub](https://github.com/orelnatan/ngx-event-bus-lib/issues)
+
