@@ -1,5 +1,6 @@
 import { DECORATOR_APPLIED } from "../consts";
 import { Args } from "../models";
+import { isRuntimeDomEventSupport } from "../utils";
 
 /**
  * Registers an instance to receive events through its @Interceptor-decorated methods.
@@ -23,8 +24,9 @@ import { Args } from "../models";
 */
 export function intercept<T>(instance: T): void {
   return (function<U extends Args>(): void {
+    if(!isRuntimeDomEventSupport()) return;
+    
     const unDecorated: boolean = !(DECORATOR_APPLIED in (Object.getPrototypeOf(instance)));
-
     if(unDecorated) {
       throw new Error('intercept() function cannot be used inside any Angular classes ' +
                       'that are not decorated with @Interceptor decorator');

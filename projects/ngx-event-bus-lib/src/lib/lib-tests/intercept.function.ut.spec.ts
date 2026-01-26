@@ -67,3 +67,63 @@ describe('intercept', () => {
     expect(_constructorMock).toHaveBeenCalledWith(instance);
   });
 });
+
+describe('intercept – runtime guard', () => {
+  const originalWindow = globalThis.window;
+  const originalDocument = globalThis.document;
+  const originalAddEventListener = globalThis.addEventListener;
+  const originalDispatchEvent = globalThis.dispatchEvent;
+
+  afterEach(() => {
+    Object.defineProperty(globalThis, 'window', {
+      value: originalWindow,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'document', {
+      value: originalDocument,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'addEventListener', {
+      value: originalAddEventListener,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'dispatchEvent', {
+      value: originalDispatchEvent,
+      configurable: true,
+    });
+  });
+
+  it('returns early in non-DOM runtime (SSR) without throwing', () => {
+    // Simulate SSR / non-browser runtime
+    Object.defineProperty(globalThis, 'window', {
+      value: undefined,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'document', {
+      value: undefined,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'addEventListener', {
+      value: undefined,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'dispatchEvent', {
+      value: undefined,
+      configurable: true,
+    });
+
+    class UndecoratedClass {
+      foo() {}
+    }
+
+    const instance = new UndecoratedClass();
+
+    expect(() => intercept(instance)).not.toThrow();
+  });
+});

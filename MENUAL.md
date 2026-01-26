@@ -39,6 +39,13 @@ npx ng test ngx-event-bus-lib --watch=false --coverage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+## Run on SSR mode
+
+Build the app first - ng build 
+
+Run the app - npm run serve:ssr:event-bus-lib
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

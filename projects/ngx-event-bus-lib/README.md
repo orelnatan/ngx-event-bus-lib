@@ -12,6 +12,7 @@
 
 [![CircleCI](https://circleci.com/gh/orelnatan/ngx-event-bus-lib/tree/master.svg?style=svg)](https://app.circleci.com/pipelines/github/orelnatan/ngx-event-bus-lib)
 [![codecov](https://codecov.io/gh/orelnatan/ngx-event-bus-lib/graph/badge.svg?token=4GAKYYNREF)](https://codecov.io/gh/orelnatan/ngx-event-bus-lib)
+[![SSR](https://img.shields.io/badge/SSR-support-brightgreen)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![NPM Version](https://img.shields.io/npm/v/on-ngx-event-bus?color=blue)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![npm package size](https://img.shields.io/npm/unpacked-size/on-ngx-event-bus?color=orange)](https://www.npmjs.com/package/on-ngx-event-bus)
 [![License](https://img.shields.io/npm/l/on-ngx-event-bus?color=blue)](https://github.com/orelnatan/ngx-event-bus-lib/blob/master/LICENSE)

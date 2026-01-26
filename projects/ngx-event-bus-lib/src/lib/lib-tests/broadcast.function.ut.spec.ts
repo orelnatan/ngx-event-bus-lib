@@ -86,3 +86,52 @@ describe('broadcast', () => {
     expect(dispatchedEvent.detail.data).toBeNull();
   });
 });
+
+describe('broadcast – runtime guard', () => {
+  const originalWindow = globalThis.window;
+  const originalDocument = globalThis.document;
+  const originalDispatchEvent = globalThis.dispatchEvent;
+
+  afterEach(() => {
+    Object.defineProperty(globalThis, 'window', {
+      value: originalWindow,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'document', {
+      value: originalDocument,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'dispatchEvent', {
+      value: originalDispatchEvent,
+      configurable: true,
+    });
+  });
+
+  it('returns early when runtime does NOT support DOM events', () => {
+    // Simulate SSR
+    Object.defineProperty(globalThis, 'window', {
+      value: undefined,
+      configurable: true,
+    });
+
+    Object.defineProperty(globalThis, 'document', {
+      value: undefined,
+      configurable: true,
+    });
+
+    const dispatchSpy = vi.fn();
+    Object.defineProperty(globalThis, 'dispatchEvent', {
+      value: dispatchSpy,
+      configurable: true,
+    });
+
+    broadcast({
+      type: 'TEST_EVENT',
+      payload: { foo: 'bar' },
+    });
+
+    expect(dispatchSpy).not.toHaveBeenCalled();
+  });
+});

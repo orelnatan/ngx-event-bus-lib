@@ -1,5 +1,6 @@
 import { GEvent } from "../classes";
 import { PAYLOAD_PROTOTYPE } from "../consts";
+import { isRuntimeDomEventSupport } from "../utils";
 
 /**
  * Sends a global, system-wide event via the Event Bus.
@@ -26,8 +27,9 @@ import { PAYLOAD_PROTOTYPE } from "../consts";
 export function broadcast<T extends string, P = unknown>(
   event: GEvent<T, P>
 ): void {
-  const trustedPayload = Object.create(PAYLOAD_PROTOTYPE);
+  if(!isRuntimeDomEventSupport()) return;
 
+  const trustedPayload = Object.create(PAYLOAD_PROTOTYPE);
   Object.assign(trustedPayload, { 
     data: event.payload ?? null,
     key: event.key
