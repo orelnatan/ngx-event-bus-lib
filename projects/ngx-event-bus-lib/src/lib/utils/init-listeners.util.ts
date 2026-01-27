@@ -19,7 +19,7 @@ export function initListeners<T extends Args>(events: Event[], instance: Instanc
       }
       
       // Guard 3:
-      // Interceptor integrity check — ensure the configured action exists and callable, misconfiguration is treated as a hard error ❌
+      // Interceptor integrity check — ensure the configured action exists and accessible, misconfiguration is treated as a hard error ❌
       if (typeof instance[event.action] !== 'function') {
         throw new Error(
           `Interceptor error: "${event.action}" is not a function on ${instance.constructor.name}`
